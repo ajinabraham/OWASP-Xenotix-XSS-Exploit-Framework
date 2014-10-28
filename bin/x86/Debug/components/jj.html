@@ -1,0 +1,155 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xml:lang="ja" xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!-- 
+
+function jjencode( gv, text )
+{
+    var r="";
+    var n;
+    var t;
+    var b=[ "___", "__$", "_$_", "_$$", "$__", "$_$", "$$_", "$$$", "$___", "$__$", "$_$_", "$_$$", "$$__", "$$_$", "$$$_", "$$$$", ];
+    var s = "";
+    for( var i = 0; i < text.length; i++ ){
+        n = text.charCodeAt( i );
+        if( n == 0x22 || n == 0x5c ){
+            s += "\\\\\\" + text.charAt( i ).toString(16);
+        }else if( (0x21 <= n && n <= 0x2f) || (0x3A <= n && n <= 0x40) || ( 0x5b <= n && n <= 0x60 ) || ( 0x7b <= n && n <= 0x7f ) ){
+        //}else if( (0x20 <= n && n <= 0x2f) || (0x3A <= n == 0x40) || ( 0x5b <= n && n <= 0x60 ) || ( 0x7b <= n && n <= 0x7f ) ){
+            s += text.charAt( i );
+        }else if( (0x30 <= n && n <= 0x39 ) || (0x61 <= n && n <= 0x66 ) ){
+            if( s ) r += "\"" + s +"\"+";
+            r += gv + "." + b[ n < 0x40 ? n - 0x30 : n - 0x57 ] + "+";
+            s="";
+        }else if( n == 0x6c ){ // 'l'
+            if( s ) r += "\"" + s + "\"+";
+            r += "(![]+\"\")[" + gv + "._$_]+";
+            s = "";
+        }else if( n == 0x6f ){ // 'o'
+            if( s ) r += "\"" + s + "\"+";
+            r += gv + "._$+";
+            s = "";
+        }else if( n == 0x74 ){ // 'u'
+            if( s ) r += "\"" + s + "\"+";
+            r += gv + ".__+";
+            s = "";
+        }else if( n == 0x75 ){ // 'u'
+            if( s ) r += "\"" + s + "\"+";
+            r += gv + "._+";
+            s = "";
+        }else if( n < 128 ){
+            if( s ) r += "\"" + s;
+            else r += "\"";
+            r += "\\\\\"+" + n.toString( 8 ).replace( /[0-7]/g, function(c){ return gv + "."+b[ c ]+"+" } );
+            s = "";
+        }else{
+            if( s ) r += "\"" + s;
+            else r += "\"";
+            r += "\\\\\"+" + gv + "._+" + n.toString(16).replace( /[0-9a-f]/gi, function(c){ return gv + "."+b[parseInt(c,16)]+"+"} );
+            s = "";
+        }
+    }
+    if( s ) r += "\"" + s + "\"+";
+
+    r = 
+    gv + "=~[];" + 
+    gv + "={___:++" + gv +",$$$$:(![]+\"\")["+gv+"],__$:++"+gv+",$_$_:(![]+\"\")["+gv+"],_$_:++"+
+    gv+",$_$$:({}+\"\")["+gv+"],$$_$:("+gv+"["+gv+"]+\"\")["+gv+"],_$$:++"+gv+",$$$_:(!\"\"+\"\")["+
+    gv+"],$__:++"+gv+",$_$:++"+gv+",$$__:({}+\"\")["+gv+"],$$_:++"+gv+",$$$:++"+gv+",$___:++"+gv+",$__$:++"+gv+"};"+
+    gv+".$_="+
+    "("+gv+".$_="+gv+"+\"\")["+gv+".$_$]+"+
+    "("+gv+"._$="+gv+".$_["+gv+".__$])+"+
+    "("+gv+".$$=("+gv+".$+\"\")["+gv+".__$])+"+
+    "((!"+gv+")+\"\")["+gv+"._$$]+"+
+    "("+gv+".__="+gv+".$_["+gv+".$$_])+"+
+    "("+gv+".$=(!\"\"+\"\")["+gv+".__$])+"+
+    "("+gv+"._=(!\"\"+\"\")["+gv+"._$_])+"+
+    gv+".$_["+gv+".$_$]+"+
+    gv+".__+"+
+    gv+"._$+"+
+    gv+".$;"+
+    gv+".$$="+
+    gv+".$+"+
+    "(!\"\"+\"\")["+gv+"._$$]+"+
+    gv+".__+"+
+    gv+"._+"+
+    gv+".$+"+
+    gv+".$$;"+
+    gv+".$=("+gv+".___)["+gv+".$_]["+gv+".$_];"+
+    gv+".$("+gv+".$("+gv+".$$+\"\\\"\"+" + r + "\"\\\"\")())();";
+
+    return r;
+}
+
+var _prev;
+
+function keyup( force )
+{
+    var t = document.getElementById( "src" ).value;
+    var v = document.getElementById( "var" ).value || "$";
+	var p = document.getElementById( "palindrome" ).checked;
+	var r;
+
+    if( _prev != ( t + "\0" + v + "\0" + p ) || force ){
+		r = jjencode( v, t );
+		if( p ){
+			r = r.replace( /[,;]$/, "" );
+			r = "\"\'\\\"+\'+\"," + r + ",\'," + r.split("").reverse().join("") +",\"+\'+\"\\\'\"";
+		}
+		document.getElementById("dst").value = r;
+		document.getElementById("letters").innerHTML = r.length;
+        _prev = t + "\0" + v;
+        document.getElementById( "permalink").setAttribute( "href", 
+            location.href.replace( /\?.*$/, "" ) + "?src=" + encodeURIComponent( t ) + "&var=" + encodeURIComponent( v ) ) + "&p=" + p ? 1 : 0;
+    }
+}
+
+function init()
+{
+    var q = document.location.search && document.location.search.substring( 1 ).split( "&" );
+    for( var i = 0; i < q.length; i++ ){
+        if( q[ i ].substring( 0, 4 ) == "src=" ){
+            document.getElementById( "src" ).value = decodeURIComponent( q[ i ].substring( 4 ) );
+        }else if( q[ i ].substring( 0, 4 ) == "var=" ){
+            document.getElementById( "var" ).value = decodeURIComponent( q[ i ].substring( 4 ) );
+        }else if( q[ i ].substring( 0, 2 ) == "p=" ){
+            document.getElementById( "palindrome" ).checked = q[ i ].substring( 2 ).valueOf() == 1;
+        }
+
+    }
+    keyup( true );
+    document.getElementById( 'src' ).focus();
+}
+-->
+</script>
+</head>
+<body onload="javascript:init()">
+<div>
+<p align="center"><a href="http://utf-8.jp/public/jjencode.html">jjencode</a></p>
+JavaScript source:<br><br>
+<textarea style="width:100%;height:5em" id="src" onkeyup="javascript:keyup( false )" cols="" rows="">alert(1)</textarea>
+</div>
+<div>
+<label for="var">global variable name used by jjencode : </label>
+<input type="text" id="var" value="$" onkeyup="javascript:keyup( false )">
+
+<input type="checkbox" id="palindrome" onclick="javascript:keyup( false )">
+<label for="palindrome">palindrome</label>
+
+</div>
+<div style="text-align:right">
+    <input type="button" value="jjencode" onclick="javascript:keyup( true )">
+</div>
+<div>
+<textarea style="width:100%;height:20em" id="dst" rows="" cols=""></textarea>
+</div>
+<div>
+	<span id="letters">533</span> letters
+</div>
+<div style="text-align:right">
+    <input type="button" value=" eval " onclick="javascript:eval(document.getElementById(&#39;dst&#39;).value)">
+    <a href="http://utf-8.jp/public/jjencode.html?src=alert(1)&var=%24" id="permalink"></a>
+</div>
+
+</body></html>
