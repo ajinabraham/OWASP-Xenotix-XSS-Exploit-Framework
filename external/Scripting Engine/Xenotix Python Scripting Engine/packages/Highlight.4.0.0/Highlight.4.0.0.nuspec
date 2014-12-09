@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Highlight</id>
+    <version>4.0.0</version>
+    <authors>Thomas Haugland Johansen</authors>
+    <owners>Thomas Haugland Johansen</owners>
+    <licenseUrl>https://github.com/thomasjo/highlight/blob/master/LICENSE.md</licenseUrl>
+    <projectUrl>https://github.com/thomasjo/highlight</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A relatively simple and extensible syntax highlighter written in C#</description>
+  </metadata>
+</package>

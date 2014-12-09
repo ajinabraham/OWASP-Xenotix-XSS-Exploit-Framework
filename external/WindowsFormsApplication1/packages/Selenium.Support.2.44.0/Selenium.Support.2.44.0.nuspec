@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>Selenium.Support</id>
+    <version>2.44.0</version>
+    <title>Selenium WebDriver Support Classes</title>
+    <authors>Selenium Committers</authors>
+    <owners>Selenium Committers</owners>
+    <licenseUrl>http://www.apache.org/licenses/LICENSE-2.0</licenseUrl>
+    <projectUrl>http://code.google.com/p/selenium/</projectUrl>
+    <iconUrl>http://seleniumhq.org/images/big-logo.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Selenium is a set of different software tools each with a different approach to supporting browser automation. These tools are highly flexible, allowing many options for locating and manipulating elements within a browser, and one of its key features is the support for automating multiple browser platforms. This package contains .NET support classes for the Selenium WebDriver API, which includes helper classes for HTML Select elements, waiting for conditions, and Page Object creation.</description>
+    <summary>Support classes for the .NET bindings of the Selenium WebDriver API</summary>
+    <tags>Selenium WebDriver browser automation support</tags>
+    <dependencies>
+      <dependency id="Selenium.WebDriver" version="2.44.0" />
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System.Drawing" targetFramework="" />
+    </frameworkAssemblies>
+  </metadata>
+</package>
