@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<bindings xmlns="http://www.mozilla.org/xbl">
+  <binding id="kcf">
+    <implementation>
+      <constructor><![CDATA[alert('Xenotix-XML')]]></constructor>
+    </implementation>
+  </binding>
+</bindings>

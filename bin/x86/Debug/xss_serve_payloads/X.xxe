@@ -1,0 +1,4 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"></head>
+<body><pre style="word-wrap: break-word; white-space: pre-wrap;">
+&lt;script xmlns="http://www.w3.org/1999/xhtml"&gt;alert('Xenotix-XXE)&lt;/script&gt;
+</pre></body></html>
