@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<title>Static DOM XSS Scanner Report</title>
+ <link href="template/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading"><center><h2>Static DOM XSS Scanner Report</h2></center></div>
+  <div class="panel-body">
+    <p>Static DOM XSS Scanner Report will list out the possible sources and sinks that can cause DOM XSS.</p>
+  </div>
+
+  <!-- Table -->
+  <table class="table table-striped">
+     <thead>
+          
+            <th>File</th>
+            <th>Source</th>
+            <th>Sink</th>
+          </tr>
+        </thead>
+		
+		<tbody>
+         
+		 <tr><td>jsonp.js</br>[C:\Users\Ajin\Desktop\Training\jsonp.js]</td><td>[Line: 8] - .write(</br></td><td></td></tr><tr><td>json_hijack.js</br>[C:\Users\Ajin\Desktop\Training\json_hijack.js]</td><td>[Line: 5] - .write(</br></td><td></td></tr><tr><td>rce_filter_bypass.js</br>[C:\Users\Ajin\Desktop\Training\rce_filter_bypass.js]</td><td>[Line: 10] - .write(</br>[Line: 16] - .write(</br>[Line: 17] - .write(</br></td><td></td></tr><tr><td>rfd.js</br>[C:\Users\Ajin\Desktop\Training\rfd.js]</td><td>[Line: 10] - .write(</br></td><td></td></tr><tr><td>json_hijack.js</br>[C:\Users\Ajin\Desktop\Training\windows\json_hijack.js]</td><td>[Line: 5] - .write(</br></td><td></td></tr><tr><td>rfd.js</br>[C:\Users\Ajin\Desktop\Training\windows\rfd.js]</td><td>[Line: 10] - .write(</br></td><td></td></tr>
+          
+        </tbody>
+  </table>
+</div>
+    <!-- Placed at the end of the document so the pages load faster -->
+
+    <script src="template/js/bootstrap.min.js"></script>
+    
+    <script src="template/js/ie10-viewport-bug-workaround.js"></script>
+</html>
